@@ -231,6 +231,19 @@ export type EditorThemeClasses = {
     h4?: EditorThemeClassName;
     h5?: EditorThemeClassName;
   };
+  // Handle other generic values
+  [key: string]:
+    | EditorThemeClassName
+    | TextNodeThemeClasses
+    | {
+        [key: string]:
+          | Array<EditorThemeClassName>
+          | EditorThemeClassName
+          | TextNodeThemeClasses
+          | {
+              [key: string]: EditorThemeClassName;
+            };
+      };
 };
 
 export type EditorConfig = {
@@ -334,7 +347,7 @@ export declare class LexicalNode {
   static getType: () => string;
   getType(): string;
   clone(data: any): LexicalNode;
-  exportJSON(): void;
+  exportJSON(): SerializedLexicalNode;
   importDOM(): DOMConversionMap | null;
   constructor(key?: NodeKey);
   getType(): string;
